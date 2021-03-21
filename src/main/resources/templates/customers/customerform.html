@@ -11,7 +11,7 @@
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
-    <link href="../static/css/spring-core.css"
+    <link href="../../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
 
 </head>
@@ -20,8 +20,9 @@
 
     <h2>Customer Details</h2>
     <div>
-        <form class="form-horizontal" th:object="${customers}" th:action="@{/templates/customers}" method="post">
+        <form class="form-horizontal" th:object="${customers}" th:action="@{/customers}" method="post">
             <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{version}"/>
             <div class="form-group">
                 <label class="col-sm-2 control-label">First Name:</label>
                 <div class="col-sm-10">
@@ -90,7 +91,7 @@
 
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="/customers">Back to Customers' List</a>
+                    <a href="/customers/list">Back to Customers' List</a>
                 </div>
             </div>
         </form>

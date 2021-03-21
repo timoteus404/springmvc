@@ -1,10 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.entity.Product;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.demo.entity.Customer;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +11,7 @@ import java.util.List;
 
 @Service
 @Profile("jpadao")
-public class ProductServiceDaoImpl implements ProductService{
+public class CustomerServiceDaoImpl implements CustomerService{
 
     private EntityManagerFactory emf;
 
@@ -25,28 +21,22 @@ public class ProductServiceDaoImpl implements ProductService{
     }
 
     @Override
-    public List<Product> listAll() {
+    public List<Customer> listAll() {
         EntityManager em = emf.createEntityManager();
-        return em.createQuery("From Product", Product.class).getResultList();
+        return em.createQuery("from Customer", Customer.class).getResultList();
     }
 
     @Override
-    public Product getById(Integer id) {
+    public Customer getById(Integer id) {
         EntityManager em = emf.createEntityManager();
-        return em.find(Product.class, id);
+        return em.find(Customer.class, id);
     }
 
-    /**
-     * This method is saving the data as a new object if that object doesn't exist in the database.
-     * If the object already in the database, it will update (merge) the objects.
-     * @param product entity
-     * @return result that is updated or newly created
-     */
     @Override
-    public Product saveOrUpdate(Product product) {
+    public Customer saveOrUpdate(Customer entity) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Product result = em.merge(product);
+        Customer result = em.merge(entity);
         em.getTransaction().commit();
         return result;
     }
@@ -55,7 +45,7 @@ public class ProductServiceDaoImpl implements ProductService{
     public void delete(Integer id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.find(Product.class, id));
+        em.remove(em.find(Customer.class, id));
         em.getTransaction().commit();
     }
 }

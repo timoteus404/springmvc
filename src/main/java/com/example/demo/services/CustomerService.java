@@ -5,13 +5,6 @@ import com.example.demo.entity.Product;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerService extends CRUDService<Customer>{
 
-    List<Customer> listAllCustomer();
-
-    Customer getCustomerById(Integer id);
-
-    Customer saveOrUpdateCustomer(Customer customer);
-
-    void delete(Integer id);
 }

@@ -1,54 +1,39 @@
 package com.example.demo.services;
 
+import com.example.demo.entity.BaseEntity;
 import com.example.demo.entity.Customer;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+@Profile("map")
+public class CustomerServiceImpl extends AbstractMapService implements CustomerService{
 
-    private Map<Integer,Customer> customers;
-
-    public CustomerServiceImpl() {
-        loadCustomer();
-    }
-    
     @Override
-    public List<Customer> listAllCustomer() {
-        return new ArrayList<>(customers.values());
+    public List<BaseEntity> listAll() {
+        return super.listAll();
     }
 
     @Override
-    public Customer getCustomerById(Integer id) {
-        return customers.get(id);
+    public Customer getById(Integer id) {
+        return (Customer) super.getById(id);
     }
 
     @Override
-    public Customer saveOrUpdateCustomer(Customer customer) {
-        if (customer != null){
-            if (customer.getId() == null){
-                customer.setId(getNextKey());
-            }
-            customers.put(customer.getId(), customer);
-
-            return customer;
-        } else {
-            throw new RuntimeException("Product Can't be null");
-        }
+    public Customer saveOrUpdate(Customer customer) {
+        return (Customer) super.saveOrUpdate(customer);
     }
 
     @Override
     public void delete(Integer id) {
-        customers.remove(id);
+        super.delete(id);
     }
 
-    private Integer getNextKey(){
-        return Collections.max(customers.keySet()) + 1;
-    }
-
-    private void loadCustomer(){
-        customers = new HashMap<>();
+    @Override
+    protected void loadDomainObjects() {
+        domainMap = new HashMap<>();
 
         Customer customer1 = new Customer();
         customer1.setId(1);
@@ -63,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService{
         customer1.setZipCode("01234");
 
 
-        customers.put(1, customer1);
+        domainMap.put(1, customer1);
 
         Customer customer2 = new Customer();
         customer2.setId(2);
@@ -77,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService{
         customer2.setState("NY");
         customer2.setZipCode("01234");
 
-        customers.put(2, customer2);
+        domainMap.put(2, customer2);
 
         Customer customer3 = new Customer();
         customer3.setId(3);
@@ -91,7 +76,7 @@ public class CustomerServiceImpl implements CustomerService{
         customer3.setState("NY");
         customer3.setZipCode("01234");
 
-        customers.put(3, customer3);
+        domainMap.put(3, customer3);
 
         Customer customer4 = new Customer();
         customer4.setId(4);
@@ -104,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService{
         customer4.setCity("New York");
         customer4.setState("NY");
         customer4.setZipCode("01234");
-        customers.put(4, customer4);
+        domainMap.put(4, customer4);
 
         Customer customer5 = new Customer();
         customer5.setId(5);
@@ -118,6 +103,7 @@ public class CustomerServiceImpl implements CustomerService{
         customer5.setState("NY");
         customer5.setZipCode("01234");
 
-        customers.put(5, customer5);
+        domainMap.put(5, customer5);
     }
+
 }

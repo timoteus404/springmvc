@@ -11,14 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@MappedSuperclass
-public class BaseEntity implements Serializable {
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@MappedSuperclass
+public interface BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    Integer getId();
+
+    void setId(Integer id);
 }
