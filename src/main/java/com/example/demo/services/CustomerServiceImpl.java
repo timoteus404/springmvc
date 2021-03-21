@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService{
 
             return customer;
         } else {
-            throw new RuntimeException("Product Can't be nill");
+            throw new RuntimeException("Product Can't be null");
         }
     }
 
