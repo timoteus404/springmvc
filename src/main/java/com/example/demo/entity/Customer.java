@@ -3,12 +3,15 @@ package com.example.demo.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Version;
+
 @Getter
 @Setter
+@Entity
+public class Customer extends BaseEntity{
 
-public class Customer {
-
-    private Integer id;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,5 +21,8 @@ public class Customer {
     private String city;
     private String state;
     private String zipCode;
+
+    @Version
+    private Integer version;
 
 }
