@@ -50,7 +50,7 @@ public class CustomerController {
     public String saveOrUpdateCustomer(Customer customer){
         Customer savedCustomer = customerService.saveOrUpdate(customer);
 //        return "redirect:/customers/" + savedCustomer.getId();
-        return "redirect:/customers/list";
+        return "redirect:/customers/show/" + savedCustomer.getId();
     }
 
     @RequestMapping("/delete/{id}")

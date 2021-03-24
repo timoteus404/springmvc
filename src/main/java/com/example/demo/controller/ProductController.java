@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/product")
 public class ProductController {
 
     private ProductService productService;
@@ -19,42 +20,42 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping("/products")
+    @RequestMapping({"/list", "/"})
     public String listProduct(Model model){
         model.addAttribute("products", productService.listAll());
-        return "products";
+        return "products/list";
     }
 
-    @RequestMapping("/product/{id}")
+    @RequestMapping("/show/{id}")
     public String getProduct(@PathVariable Integer id, Model model){
 
         model.addAttribute("product", productService.getById(id));
 
-        return "product";
+        return "products/show";
     }
 
-    @RequestMapping("product/edit/{id}")
+    @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("product", productService.getById(id));
-        return "productform";
+        return "products/productform";
     }
 
-    @RequestMapping("/product/new")
+    @RequestMapping("/new")
     public String newProduct(Model model){
         model.addAttribute("product", new Product());
-        return "productform";
+        return "products/productform";
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String saveOrUpdateProduct(Product product){
         Product savedProduct = productService.saveOrUpdate(product);
-        return "redirect:/product/" + savedProduct.getId();
+        return "redirect:/product/list";
     }
 
-    @RequestMapping("/product/delete/{id}")
+    @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Integer id){
         productService.delete(id);
-        return "redirect:/product/";
+        return "redirect:/product/list";
 
     }
 }

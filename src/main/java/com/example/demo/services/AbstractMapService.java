@@ -21,16 +21,20 @@ public abstract class AbstractMapService{
         return domainMap.get(id);
     }
 
+    ///possibly causing SQLTransientConnectionException
     public BaseEntity saveOrUpdate(BaseEntity domainObject) {
+        System.out.println("saveOrUpdate is running");
         if (domainObject != null){
-
+            System.out.println("saveOrUpdate is running");
             if (domainObject.getId() == null){
                 domainObject.setId(getNextKey());
             }
+            System.out.println("saveOrUpdate is running");
             domainMap.put(domainObject.getId(), domainObject);
-
+            System.out.println("saveOrUpdate is running");
             return domainObject;
         } else {
+            System.out.println("saveOrUpdate is running");
             throw new RuntimeException("Object Can't be null");
         }
     }

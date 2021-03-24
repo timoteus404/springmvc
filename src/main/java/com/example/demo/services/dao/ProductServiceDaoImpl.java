@@ -1,6 +1,7 @@
-package com.example.demo.services;
+package com.example.demo.services.dao;
 
 import com.example.demo.entity.Product;
+import com.example.demo.services.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,11 @@ import java.util.List;
 
 @Service
 @Profile("jpadao")
-public class ProductServiceDaoImpl implements ProductService{
+public class ProductServiceDaoImpl implements ProductService {
 
     private EntityManagerFactory emf;
 
+    //JPA standard. Tells to inject emf.
     @PersistenceUnit
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
@@ -48,6 +50,7 @@ public class ProductServiceDaoImpl implements ProductService{
         em.getTransaction().begin();
         Product result = em.merge(product);
         em.getTransaction().commit();
+//        em.getTransaction().rollback();
         return result;
     }
 
@@ -57,5 +60,6 @@ public class ProductServiceDaoImpl implements ProductService{
         em.getTransaction().begin();
         em.remove(em.find(Product.class, id));
         em.getTransaction().commit();
+//        em.getTransaction().rollback();
     }
 }

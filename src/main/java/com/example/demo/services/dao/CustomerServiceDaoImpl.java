@@ -1,6 +1,7 @@
-package com.example.demo.services;
+package com.example.demo.services.dao;
 
 import com.example.demo.entity.Customer;
+import com.example.demo.services.CustomerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @Profile("jpadao")
-public class CustomerServiceDaoImpl implements CustomerService{
+public class CustomerServiceDaoImpl implements CustomerService {
 
     private EntityManagerFactory emf;
 
@@ -38,6 +39,7 @@ public class CustomerServiceDaoImpl implements CustomerService{
         em.getTransaction().begin();
         Customer result = em.merge(entity);
         em.getTransaction().commit();
+        em.getTransaction().rollback();
         return result;
     }
 
@@ -47,5 +49,6 @@ public class CustomerServiceDaoImpl implements CustomerService{
         em.getTransaction().begin();
         em.remove(em.find(Customer.class, id));
         em.getTransaction().commit();
+//        em.getTransaction().rollback();
     }
 }
