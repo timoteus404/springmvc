@@ -25,6 +25,9 @@ public class Customer implements BaseEntity{
     @Version
     private Integer version;
 
+    @OneToOne
+    private User user;
+
 
     @Override
     public Integer getId() {
@@ -114,5 +117,13 @@ public class Customer implements BaseEntity{
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

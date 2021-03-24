@@ -1,7 +1,8 @@
-package com.example.demo.services;
+package com.example.demo.services.mapservices;
 
 import com.example.demo.entity.BaseEntity;
 import com.example.demo.entity.Customer;
+import com.example.demo.services.CustomerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.*;
 
 @Service
 @Profile("map")
-public class CustomerServiceImpl extends AbstractMapService implements CustomerService{
+public class CustomerServiceImpl extends AbstractMapService implements CustomerService {
 
     @Override
     public List<BaseEntity> listAll() {

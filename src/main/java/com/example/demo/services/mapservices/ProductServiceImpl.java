@@ -1,7 +1,8 @@
-package com.example.demo.services;
+package com.example.demo.services.mapservices;
 
 import com.example.demo.entity.BaseEntity;
 import com.example.demo.entity.Product;
+import com.example.demo.services.ProductService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
